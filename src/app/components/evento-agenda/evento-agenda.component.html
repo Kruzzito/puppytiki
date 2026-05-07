@@ -1,0 +1,39 @@
+<ion-card class="evento-card personalizado-card">
+  <div class="fecha-vertical">
+    <div class="texto-rotado">
+      {{ evento.fecha | fechaLarga }}
+    </div>
+  </div>
+
+  <div (click)="abrirDetalle()" class="card-info">
+    <h3 class="card-title truncate">{{ evento.evento }}</h3>
+
+    <div class="detail-item" *ngIf="evento.lugar">
+      <span class="emoji">📍</span>
+      <span class="truncate">{{ evento.lugar }}</span>
+    </div>
+
+    <div class="detail-item" *ngIf="evento.descripcion">
+      <span class="emoji">📝</span>
+      <span class="truncate">{{ evento.descripcion }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="emoji">⏰</span>
+      <span>{{ evento.hora }}</span>
+    </div>
+  </div>
+
+  <div class="bottom-right-icon">
+    <span class="emoji">{{ evento.iconoEmoji }}</span>
+  </div>
+
+  <ion-buttons class="botones-accion" vertical>
+    <ion-button fill="clear" color="primary" size="small" (click)="onEditar($event)" title="Editar evento">
+      <ion-icon name="create"></ion-icon>
+    </ion-button>
+    <ion-button fill="clear" color="danger" size="small" (click)="onEliminar($event)" title="Eliminar evento">
+      <ion-icon name="trash"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-card>

@@ -1,0 +1,13 @@
+<ion-card (click)="abrirNoticia()" class="noticia-horizontal">
+  <div class="noticia-contenido">
+    <img *ngIf="noticia.imagenUrl" [src]="noticia.imagenUrl" alt="{{ noticia.titulo }}">
+    <div class="noticia-texto">
+      <div class="noticia-fecha" *ngIf="noticia.fechaHora">
+        {{ noticia.fechaHora | date:'d \'de\' MMMM \'del\' y, h:mm a' }}
+      </div>
+      <ion-card-title>{{ noticia.titulo }}</ion-card-title>
+      <div class="noticia-resumen">{{ noticia.noticia }}</div>
+      <div class="continuar-leyendo">... continuar leyendo</div>
+    </div>
+  </div>
+</ion-card>

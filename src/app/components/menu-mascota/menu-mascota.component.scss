@@ -1,0 +1,169 @@
+.menu-list {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgb(234, 198, 244);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  animation: slideDown 0.3s forwards;
+}
+
+.icoMenu {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0;
+
+  &::before {
+    content: '🖨️';
+    font-size: 16px;
+    display: inline-block;
+    animation: escalar 1s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes escalar {
+  0% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1.8);
+  }
+}
+
+ion-list {
+  flex: 1 1 auto;
+  overflow-y: auto; 
+  margin: 0;
+  padding: 0;
+}
+
+.agenda {
+  height: 350px; 
+  overflow-y: auto;
+}
+
+.tituloEvento,
+.fechaHora p {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.fechaHora {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.tituloEvento {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.botonesAgenda {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.botonesAgenda ion-item {
+  flex: 1;
+  margin: 0;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+}
+
+.calendar-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 30%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #ccc;
+  font-family: 'IBM Plex Mono', monospace;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.anio-section {
+  position: relative;
+  height: 30px;
+  background: red;
+  font-weight: 800;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.anio-section span {
+  position: absolute;
+  transition: opacity 0.8s ease-in-out;
+  opacity: 1;
+}
+
+.anio-section .fade {
+  opacity: 0;
+}
+
+.date-section {
+  background-color: #fff;
+  display: flex;
+  line-height: 15px;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 5px 0 1px 0;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.day-number {
+  font-size: 1.6em;
+  font-weight: bold;
+  color: #333;
+  margin-top: 0;
+}
+
+.day-name {
+  font-size: 0.8em;
+  color: #555;
+  margin: 0;
+}
+
+.sin-eventos {
+  text-align: center;
+  font-style: italic;
+  color: #999999;
+}

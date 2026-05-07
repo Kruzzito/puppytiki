@@ -1,0 +1,49 @@
+ion-tab-bar {
+  transition: background 0.3s ease;
+  padding-bottom: 10px; 
+
+  ion-tab-button {
+    background: transparent !important;
+    color: white !important;
+    border-radius: 8px;
+    margin: 2px;
+
+    ion-icon,
+    ion-label {
+      color: white !important;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .button-native {
+      background: transparent !important;
+      color: inherit !important;
+    }
+  }
+
+  ion-tab-button.tab-selected {
+    ion-icon,
+    ion-label {
+      color: #ffffff !important;
+      font-weight: bold;
+      transform: scale(1.1);
+    }
+  }
+}
+
+ion-tab-bar.tab-mascotas { background: var(--tab-mascotas-1); }
+ion-tab-bar.tab-tienda   { background: var(--tab-tienda-1); }
+ion-tab-bar.tab-noticias { background: var(--tab-noticias-1); }
+
+ion-app.bg-mascotas ion-router-outlet,
+ion-app.bg-mascotas ion-router-outlet ion-content { --background: var(--tab-mascotas-2); }
+ion-app.bg-tienda ion-router-outlet,
+ion-app.bg-tienda ion-router-outlet ion-content   { --background: var(--tab-tienda-2); }
+ion-app.bg-noticias ion-router-outlet,
+ion-app.bg-noticias ion-router-outlet ion-content { --background: var(--tab-noticias-2); }
+
+ion-router-outlet {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+

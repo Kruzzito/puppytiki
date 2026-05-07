@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ noticia.titulo }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="media-container">
+    <div *ngIf="noticia.videoUrl; else mostrarImagen" class="youtube-container">
+      <iframe
+        [src]="youtubeEmbedUrl | safeUrl"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <ng-template #mostrarImagen>
+      <img *ngIf="noticia.imagenUrl" [src]="noticia.imagenUrl" alt="{{ noticia.titulo }}">
+    </ng-template>
+  </div>
+
+  <div class="datos-noticia">
+    <p *ngIf="noticia.autor || noticia.autorOcupacion" class="autor">
+      <strong *ngIf="noticia.autor">{{ noticia.autor }}</strong>
+    </p>
+    <p *ngIf="noticia.autorOcupacion" class="autorOcupacion"> {{ noticia.autorOcupacion }}</p>
+
+    <p *ngIf="noticia.fechaHora" class="fecha">
+      {{ noticia.fechaHora | date:"d 'de' MMMM 'del' y, h:mm a" }}
+    </p>
+  </div>
+
+  <div class="noticia-texto">
+    <p>{{ noticia.noticia }}</p>
+  </div>
+</ion-content>

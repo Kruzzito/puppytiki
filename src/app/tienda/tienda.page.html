@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="toggleMenu()">
+        <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Tienda</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<app-menu-tienda
+  *ngIf="mostrarMenu"
+  [categoriaSeleccionada]="categoriaSeleccionada"
+  (cerrar)="cerrarMenu()"
+  (categoriaChange)="onCategoriaChange($event)">
+</app-menu-tienda>
+
+<ion-content class="tienda-content">
+
+  <div class="page-tienda">
+    <app-buscador
+      [placeholder]="'Buscar en ' + (categoriaSeleccionada === favoritosKey ? 'favoritos' : categoriaSeleccionada) + '...'"
+      (searchChange)="filtrar($event)">
+    </app-buscador>
+  </div>
+
+  <div class="tienda-layout">
+
+
+    <div class="slider-wrapper-container" *ngIf="productosFiltrados.length > 0">
+      <app-slider-productos
+        [productos]="productosFiltrados"
+        (favoritoToggled)="toggleFavorito($event)">
+      </app-slider-productos>
+    </div>
+
+    <div class="productos-container" *ngIf="productosFiltrados.length > 0">
+      <app-producto
+        *ngFor="let p of productosFiltrados"
+        [producto]="p"
+        (favoritoToggled)="toggleFavorito(p)">
+      </app-producto>
+    </div>
+
+    <div class="sin-resultados" *ngIf="productosFiltrados.length === 0">
+      No se encontraron productos
+    </div>
+
+  </div>
+</ion-content>

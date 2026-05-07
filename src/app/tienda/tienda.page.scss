@@ -1,0 +1,73 @@
+ion-toolbar {
+  --background: var(--tab-tienda-1);
+  color: white;
+}
+
+ion-content {
+  height: 100%;
+  overflow: hidden;
+  --background: var(--tab-tienda-2);
+}
+
+.tienda-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.page-tienda {
+  flex: 0 0 auto;
+  padding: 5px;
+}
+
+.slider-wrapper-container {
+  flex: 0 0 25%;
+}
+
+.tienda-layout {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  height: calc(100% - var(--buscador-alto, 50px) - 5%);
+}
+
+.productos-container {
+  flex: 1 1 auto;
+  height: 100%;
+  overflow-y: auto; 
+  overflow-x: hidden;
+  width: 100%;
+  padding: 0 5px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+@media (min-width: 601px) {
+  .productos-container {
+    justify-items: flex-start;
+    flex-direction: row; 
+    flex-wrap: wrap;
+  }
+
+  .productos-container app-producto {
+    flex: 0 0 calc(50% - 5px); 
+    max-width: calc(50% - 5px);
+  }
+}
+
+@media (min-width: 1001px) {
+  .productos-container app-producto {
+    flex: 0 0 calc(33.333% - 5px); 
+    max-width: calc(33.333% - 5px);
+  }
+}
+
+.sin-resultados {
+  text-align: center;
+  margin-top: 20px;
+  color: #888;
+  font-size: 1rem;
+}

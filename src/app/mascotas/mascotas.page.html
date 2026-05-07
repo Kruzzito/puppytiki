@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar #toolbar>
+    <ion-title>Mascotas</ion-title>
+
+    <ion-buttons slot="end">
+      <app-menu-mascota></app-menu-mascota>
+    </ion-buttons>
+    <ion-buttons slot="end">
+  <ion-button (click)="logout()">
+    <ion-icon name="log-out-outline" slot="icon-only"></ion-icon>
+  </ion-button>
+</ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="lista-mascotas">
+    <div *ngFor="let mascota of mascotas()" class="card-mascota" (click)="verDetalleMascota(mascota)">
+
+      <div class="foto-mascota" *ngIf="mascota.foto">
+        <img [src]="mascota.foto" alt="Foto de {{ mascota.nombre }}" />
+      </div>
+
+      <div class="info-mascota">
+        <h2>{{ mascota.nombre }}</h2>
+        <p>Sexo: {{ mascota.sexo }}</p>
+        <p>Edad: {{ calcularEdad(mascota.fechaNacimiento) }}</p>
+      </div>
+
+      <div class="botones-mascota" style="position: relative;">
+        <button class="editarMas" (click)="abrirFormularioMascota(mascota); $event.stopPropagation()">
+          <ion-icon slot="icon-only" name="create"></ion-icon>
+        </button>
+        <button class="eliminarMas" (click)="eliminarMascota(mascota.id); $event.stopPropagation()">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </button>
+
+        <button class="agendaMas" (click)="abrirAgendaMascota(mascota); $event.stopPropagation()">
+          <ion-icon slot="icon-only" name="calendar-number"></ion-icon>
+        </button>
+
+        <div
+          *ngIf="eventosProximos36hMap[mascota.id] | async"
+          class="emoji-caminando"
+          [innerText]="mascota.iconoEmoji"
+          ></div>
+      </div>
+      </div>
+    </div>
+
+  <div class="contenedor-fabs">
+    <ion-fab-button class="fab-btn agenda" (click)="irAgendaCompleta()">
+      <ion-icon size="large" name="calendar-number"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button class="fab-btn nueva" (click)="abrirFormularioMascota()">
+      <ion-icon size="large" name="add"></ion-icon>
+    </ion-fab-button>
+  </div>
+
+  <div style="height: 80px;"></div>
+</ion-content>

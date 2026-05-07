@@ -1,0 +1,150 @@
+.evento-card.personalizado-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: none;
+  max-width: 100%;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.card-info {
+  flex-grow: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding-left: 40px;
+}
+
+.card-title {
+  margin: 0 0 5px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.detail-item {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 400;
+}
+
+.detail-item .emoji {
+  font-size: 1rem;
+}
+
+.truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.calendar-icon-container {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 60px;
+  height: 60px;
+  border-radius: 30%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #ccc;
+  font-family: 'IBM Plex Mono', monospace;
+  flex-shrink: 0;
+  background-color: #fff;
+}
+
+.anio-section {
+  height: 30px;
+  background: #FF5A5F;
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.date-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 5px 0 1px 0;
+  background-color: #fff;
+}
+
+.day-number {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.day-name {
+  font-size: 0.8rem;
+  color: #555;
+  margin-top: -3px;
+}
+
+.bottom-right-icon {
+  position: absolute;
+  bottom: -15px;
+  right: -15px;
+  width: 70px;
+  height: 70px;
+  background-color: #5d5dff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: white;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.botones-accion {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 10;
+}
+
+.fecha-vertical {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  background-color: #1565c0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-align: center;
+  padding: 5px 0;
+}

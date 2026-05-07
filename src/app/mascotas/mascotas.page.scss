@@ -1,0 +1,304 @@
+ion-toolbar {
+    --background: var(--tab-mascotas-1);
+    color:#f6f1ff
+}
+
+.botones-mascota {
+  display: flex;
+  flex-direction: column;
+  margin-left: 8px;
+  align-items: center;
+  position: relative;
+}
+
+.botones-mascota > ion-button {
+  border-radius: 5px;
+  margin: 0;
+  padding: 3px 0;
+}
+
+ion-content {
+  --background: var(--tab-mascotas-2);
+  padding-top: var(--toolbar-height, 56px);
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  box-sizing: border-box;
+}
+
+ion-fab {
+  bottom: calc(-40px + var(--toolbar-height, 56px));
+}
+
+ion-fab-button {
+  border-radius: 50%;
+  animation: pulso 4s ease-in-out infinite;
+}
+
+@keyframes pulso {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 4px #555175;
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px #555175;
+  }
+}
+
+.lista-mascotas {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+
+  @media (min-width: 600px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px; // espacio entre cards
+  }
+}
+
+
+.card-mascota {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #eefafc 0%, #fae8fd 100%);
+  border-radius: 60px 10px 10px 60px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  padding: 12px;
+  cursor: pointer;
+  transition: box-shadow 1s ease;
+  overflow: visible;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (min-width: 600px) {
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    }
+  }
+}
+
+.foto-mascota {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+  flex-shrink: 0; 
+  margin-right: 16px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.info-mascota {
+  flex: 1;
+
+  h2 {
+    margin: 0 0 8px 0;
+    font-size: 1.2rem;
+  }
+
+  p {
+    margin: 4px 0;
+    color: #555;
+    font-size: 0.9rem;
+  }
+}
+
+.botones-mascota {
+  display: flex;
+  flex-direction: column;
+
+  .editarMas {
+    background: #e6edf8;
+    border-radius: 4px;
+    color: #0054e9;
+    padding: 9px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 1s ease;
+
+    &:hover {
+      background-color: #0054e9;
+      color: white;
+    }
+  }
+
+  .eliminarMas {
+    background: #f8e6e6;
+    border-radius: 4px;
+    color: #e90000;
+    padding: 9px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 1s ease;
+
+    &:hover {
+      background-color: #e90000;
+      color: white;
+    }
+  }
+
+  .agendaMas {
+    background: #dcffdc;
+    border-radius: 4px;
+    color: #00e900;
+    padding: 9px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 1s ease;
+
+    &:hover {
+      background-color: #00e900;
+      color: white;
+    }
+  }
+}
+
+.contenedor-fabs {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 16px;
+  z-index: 9999;
+  pointer-events: none; 
+
+  .fab-btn {
+    pointer-events: auto;
+    animation: pulso 4s ease-in-out infinite;
+    border-radius: 50%;
+    color: white;
+  }
+
+  .fab-btn.agenda {
+    --background: #699e61;
+    color: white;
+  }
+
+  .fab-btn.nueva {
+    --background: #8462bb;
+    color: white;
+  }
+}
+
+.emoji-animado {
+  position: absolute;
+  right: 50px;
+  top: 0;
+  font-size: 2rem;
+  animation: flotarIzquierdaRebotando 1.2s ease-in-out forwards;
+  z-index: 99;
+  pointer-events: none;
+}
+
+
+
+@keyframes flotarIzquierdaRebotando {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  30% {
+    transform: translateX(-20px) scale(1.2) rotate(-10deg);
+  }
+  50% {
+    transform: translateX(-40px) scale(1) rotate(10deg);
+  }
+  70% {
+    transform: translateX(-60px) scale(1.1) rotate(-5deg);
+  }
+  100% {
+    transform: translateX(-80px) scale(0.8);
+    opacity: 0;
+  }
+}
+
+.emoji-caminando {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(72, 2, 97, 0.5);
+  position: absolute;
+  right: 50px;
+  bottom: 0;
+  font-size: 1.2rem;
+  pointer-events: none;
+  animation: cicloBrincos 28s linear infinite;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.emoji-caminando::before {
+  content: "🚨Tenemos pendientes,\arevisa mi agenda🚨";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1976d2;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  opacity: 0;
+  animation: aparecerGlobo 28s steps(6) infinite;
+  pointer-events: none;
+  white-space: normal; 
+  width: max-content;
+  max-width: 120px;
+  text-align: center;
+  word-wrap: break-word; 
+}
+
+
+@keyframes cicloBrincos {
+  0%    { transform: translateX(0) translateY(0); }
+  3.57% { transform: translateX(-10px) translateY(-10px); }
+  7.14% { transform: translateX(-20px) translateY(0); }
+  10.71%{ transform: translateX(-30px) translateY(-10px); }
+  14.28%{ transform: translateX(-40px) translateY(0); }
+  17.85%{ transform: translateX(-50px) translateY(-10px); }
+  21.42%{ transform: translateX(-60px) translateY(0); }
+  24.99%{ transform: translateX(-70px) translateY(-10px); }
+  28.56%{ transform: translateX(-80px) translateY(0); }
+  32.13%{ transform: translateX(-90px) translateY(-10px); }
+  35.71%{ transform: translateX(-100px) translateY(0); }
+  64.29% { transform: translateX(-100px) translateY(0); }
+  64.3%  { transform: translateX(-90px) translateY(-10px); }
+  67.87% { transform: translateX(-80px) translateY(0); }
+  71.44% { transform: translateX(-70px) translateY(-10px); }
+  75.01% { transform: translateX(-60px) translateY(0); }
+  78.58% { transform: translateX(-50px) translateY(-10px); }
+  82.15% { transform: translateX(-40px) translateY(0); }
+  85.72% { transform: translateX(-30px) translateY(-10px); }
+  89.29% { transform: translateX(-20px) translateY(0); }
+  92.86% { transform: translateX(-10px) translateY(-10px); }
+  96.43% { transform: translateX(0) translateY(0); }
+  100%   { transform: translateX(0) translateY(0); }
+}
+
+@keyframes aparecerGlobo {
+  0%, 35.7%, 64.3%, 100% {
+    opacity: 0;
+  }
+  40%, 45%, 50%, 55%, 60%, 63% {
+    opacity: 1;
+  }
+}

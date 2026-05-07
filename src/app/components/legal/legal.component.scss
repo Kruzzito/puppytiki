@@ -1,0 +1,126 @@
+/* Contenedor interno del modal */
+.legal-wrapper {
+  padding: 24px; 
+  max-width: 650px; 
+  margin: 16px auto;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  line-height: 1.6;
+  word-wrap: break-word;
+  overflow-y: auto;
+
+  h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #4b0082;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 4px;
+  }
+
+  h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #7c3aed;
+  }
+
+  p {
+    margin-bottom: 12px;
+    font-size: 15px;
+    color: #444;
+  }
+
+  ul {
+    margin-left: 24px;
+    margin-bottom: 16px;
+
+    li {
+      margin-bottom: 6px;
+      font-size: 15px;
+      position: relative;
+      padding-left: 6px;
+
+      &::before {
+        content: '•';
+        position: absolute;
+        left: -12px;
+        color: #7c3aed;
+      }
+    }
+  }
+
+  a {
+    color: #5b21b6;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 480px) {
+    padding: 16px;
+    h3 { font-size: 20px; }
+    h4 { font-size: 16px; }
+    p, li { font-size: 14px; }
+  }
+}
+
+ion-modal {
+  --background: rgba(0, 0, 0, 0.35);
+}
+
+.buttons{
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+
+  button {
+    background-color: #7c3aed;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #5b21b6;
+    }
+  }
+}
+
+.social-icons {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 40px; 
+}
+
+
+ion-icon[name="logo-youtube"],
+ion-icon[name="logo-facebook"] {
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out; /* Suaviza la animación */
+}
+
+ion-icon[name="logo-youtube"]{
+  color: #ca2b2b;
+}
+
+ion-icon[name="logo-facebook"] {
+    color: #2a62a7;
+}
+
+
+ion-icon[name="logo-youtube"]:hover {
+  color: #c40000;
+  transform: scale(1.2);
+}
+
+
+ion-icon[name="logo-facebook"]:hover {
+  color: #145cb3;
+  transform: scale(1.2);
+}

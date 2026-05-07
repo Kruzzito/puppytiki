@@ -1,0 +1,16 @@
+ion-item.invalid {
+  --border-color: #f44336;
+  --highlight-color-focused: #f44336;
+}
+
+.error-text {
+  color: #f44336;
+  font-size: 0.9em;
+  margin: 4px 16px 12px;
+}
+
+.emoji-header {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{
+        type === 'policies'
+          ? 'Políticas de Privacidad'
+          : type === 'terms'
+            ? 'Términos y Condiciones'
+            : 'Bienvenida'
+      }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="legal-wrapper" [innerHTML]="htmlText"></div>
+
+  <div class="buttons">
+    <button color="primary" (click)="accept()">Aceptar</button>
+  </div>
+
+
+  <div class="social-icons">
+    <a target="_blank" href="https://mixteco-studio.blogspot.com/#inicio">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi7eIaP3PUtsqVGBWt2rkpwVxzKc0RTJ7oEfcLTq_1aUrse79fVTJP2IvyCg0PoiNqCxNxJ24v68OWMPvFxfbuAo1_G95hBZKdl-3qrVYmUmYFJ27zWUeTrlKQo-9BlFTZFSS5kyg1BRt48vRnF4FQLzyiEHgnuNgH0z53Vx1FFGz3S1T5qH6DsH-9cGMiv/s320/logo01sn.png" style="width: 20px;" alt="">
+    </a>
+    <a target="_blank" href="https://www.youtube.com/@MixtecoStudio">
+      <ion-icon name="logo-youtube"></ion-icon>
+    </a>
+    <a target="_blank" href="https://www.facebook.com/profile.php?id=61580618970334">
+      <ion-icon name="logo-facebook"></ion-icon>
+    </a>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+  </ion-toolbar>
+</ion-footer>

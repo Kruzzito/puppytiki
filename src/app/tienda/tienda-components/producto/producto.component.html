@@ -1,0 +1,17 @@
+<ion-card (click)="abrirEnlace()">
+  <div class="productoImagen">
+    <img [src]="producto.imagenUrl" [alt]="producto.producto">
+  </div>
+
+  <ion-card-header>
+    <ion-card-title>{{ producto.producto }}</ion-card-title>
+    <ion-card-subtitle>{{ producto.precio | currency:'MXN':'symbol' }}</ion-card-subtitle>
+    <ion-card-subtitle>{{ producto.descripcion }}</ion-card-subtitle>
+    <ion-card-subtitle>{{ producto.stock }}</ion-card-subtitle>
+
+  </ion-card-header>
+
+  <ion-button fill="clear" color="danger" (click)="toggleFavorito(); $event.stopPropagation()">
+    <ion-icon [name]="esFavorito() ? 'heart' : 'heart-outline'"></ion-icon>
+  </ion-button>
+</ion-card>

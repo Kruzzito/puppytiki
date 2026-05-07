@@ -1,0 +1,7 @@
+{
+  "name": "appUno",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

@@ -1,0 +1,96 @@
+:host {
+  ion-content {
+    --overflow: hidden;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 auto;
+    max-width: 900px;
+    height: 100vh;
+    box-sizing: border-box;
+    background-color: #f5f0ff;
+    display: flex;
+    justify-content: center;
+  }
+
+  .agenda-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    height: 100%;
+    width: 100%;
+  }
+
+  app-calendario {
+    flex: 0 0 auto;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .scrollable-eventos {
+    flex: 1 1 auto;
+    max-height: calc(100vh - 250px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 12px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+
+    app-evento-agenda {
+      width: 100%; 
+      margin-bottom: 12px;
+    }
+  }
+
+  .boton-flotante {
+    position: fixed !important;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 56px;
+    height: 56px;
+    --border-radius: 50%;
+    --background: #1565c0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    --box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    animation: crecer-achicar 2s ease-in-out infinite;
+  }
+
+  @keyframes crecer-achicar {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+
+  @media (min-width: 600px) {
+    .agenda-wrapper {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center; 
+      gap: 24px;
+      padding: 20px;
+    }
+
+    app-calendario {
+      flex: 0 0 45%;
+      max-width: 400px;
+      height: auto;
+    }
+
+    .scrollable-eventos {
+      flex: 1 1 auto;
+      max-height: none;
+      height: 100%;
+      overflow-y: auto;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+<div class="login-container">
+
+  <img src="assets/logos/logo02.png"
+       alt="Logo"
+       class="logo"
+       [class.side-bounce]="!(acceptedPolicies && acceptedTerms && acceptedWelcome)"
+       [class.jump-flip-glow]="acceptedPolicies && acceptedTerms && acceptedWelcome">
+
+  <div class="checkboxes">
+    <div class="checkbox-item">
+      <input type="checkbox" [(ngModel)]="acceptedPolicies">
+      <span class="label-text" (click)="openLegal('policies')">
+        Acepto Políticas de Privacidad
+      </span>
+    </div>
+
+    <div class="checkbox-item">
+      <input type="checkbox" [(ngModel)]="acceptedTerms">
+      <span class="label-text" (click)="openLegal('terms')">
+        Acepto Términos y Condiciones
+      </span>
+    </div>
+
+    <div class="checkbox-item">
+      <input type="checkbox" [(ngModel)]="acceptedWelcome">
+      <span class="label-text" (click)="openLegal('welcome')">
+        He leído el Mensaje de Bienvenida
+      </span>
+    </div>
+  </div>
+
+  <button [disabled]="!(acceptedPolicies && acceptedTerms && acceptedWelcome)" (click)="login()">
+    Ingresar
+  </button>
+</div>

@@ -1,0 +1,35 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Detalle del Evento</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrar()">
+                <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding detalle-container">
+  <div class="watermark-container">
+    <div class="watermark-emoji" [style.transform]="emojiRotation">
+      {{ selectedEmoji }}
+    </div>
+  </div>
+
+
+  <div class="detalle-card">
+    <div class="mascota-container">
+      <div class="emoji-mascota">{{ evento.iconoEmoji }}</div>
+      <div class="nombre-mascota">{{ evento.nombreMascota }}</div>
+      <h2 class="titulo-evento">{{ evento.evento }}</h2>
+    </div>
+
+    <p><strong>Fecha</strong> {{ evento.fecha }}</p>
+    <p><strong>Hora</strong> {{ evento.hora }}</p>
+    <p *ngIf="evento.lugar"><strong>Lugar</strong> {{ evento.lugar }}</p>
+    <p *ngIf="evento.descripcion"><strong>Descripción</strong> {{ evento.descripcion }}</p>
+  </div>
+</ion-content>
+
+
+

@@ -1,0 +1,59 @@
+<div class="calendar-header">
+  <button (click)="mesAnterior()">
+    <ion-icon slot="icon-only" name="caret-back-outline"></ion-icon>
+  </button>
+  <h2>{{ monthYearLabel }}</h2>
+  <button (click)="mesSiguiente()">
+    <ion-icon slot="icon-only" name="caret-forward-outline"></ion-icon>
+  </button>
+</div>
+
+<div class="calendar-grid">
+  <div class="day-name" *ngFor="let dia of diasSemana">{{ dia }}</div>
+
+  <button
+    *ngFor="let dia of dias"
+    [disabled]="!dia.dia"
+    class="calendar-day"
+    [class.selected]="dia.fecha === selectedDate"
+    [class.hoy]="esHoy(dia.dia)"
+    (click)="seleccionarDia(dia.dia!)"
+  >
+    <span class="day-number">{{ dia.dia }}</span>
+
+    <div
+      class="emoji-stack"
+      [class.expanded]="emojiExpandida === dia.fecha"
+      *ngIf="dia.fecha"
+    >
+<span
+  *ngFor="let e of obtenerEmojisParaFecha(dia.fecha); let i = index"
+  class="emoji-bubble"
+  [class.mas]="e.emoji === '➕'"
+  [class.vibrar]="e.vibrar"
+  [class.vibrar-rapido]="e.vibrar && e.ritmo === 'vibrar-rapido'"
+  [class.vibrar-medio]="e.vibrar && e.ritmo === 'vibrar-medio'"
+  [class.vibrar-lento]="e.vibrar && e.ritmo === 'vibrar-lento'"
+  [style.animationDelay]="
+    (emojiExpandida === dia.fecha ? (i * 0.08) : (0.15 - i * 0.05)) + 's'
+  "
+  (click)="toggleExpandirEmojis($event, dia.fecha!)"
+>
+  {{ e.emoji }}
+</span>
+
+
+
+    </div>
+  </button>
+</div>
+
+<div class="slider-container">
+  <button (click)="cambiarDia(-1)">
+    <ion-icon slot="icon-only" name="caret-back-outline"></ion-icon>
+  </button>
+  <div class="fecha-central">{{ getFechaCompleta(selectedDate) }}</div>
+  <button (click)="cambiarDia(1)">
+    <ion-icon slot="icon-only" name="caret-forward-outline"></ion-icon>
+  </button>
+</div>

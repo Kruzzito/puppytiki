@@ -1,0 +1,205 @@
+:host {
+  display: block;
+  padding: 5px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  background-color: #e3f2fd;
+  padding: 8px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+
+  button {
+    font-size: 1.4rem;
+    background: none;
+    border: none;
+    color: #1565c0;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    text-transform: capitalize;
+    color: #0d47a1;
+  }
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.day-name {
+  text-align: center;
+  font-weight: 600;
+  color: #555;
+  font-size: 0.85rem;
+}
+
+.calendar-day {
+  position: relative;
+  height: 35px;
+  width: 100%;
+  background-color: #f1f5f9;
+  border-radius: 10px;
+  border: 1px solid #cfd8dc;
+  font-size: 1rem;
+  color: #263238;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+  overflow: visible;
+
+  &:hover:not(:disabled) {
+    background-color: #bbdefb;
+    border-color: #64b5f6;
+  }
+
+  &.selected {
+    background-color: #1976d2;
+    color: white;
+    font-weight: 700;
+    box-shadow: 0 0 5px #1565c0;
+  }
+
+  &.hoy {
+    border: 2px solid #0d47a1;
+    box-shadow: 0 0 5px rgba(13, 71, 161, 0.5);
+  }
+
+  &:disabled {
+    background-color: transparent;
+    border: none;
+    cursor: default;
+  }
+}
+
+.day-number {
+  pointer-events: none;
+  line-height: 1.1;
+  user-select: none;
+  margin-bottom: 4px;
+}
+
+/* Stack de emojis */
+.emoji-stack {
+  position: absolute;
+  bottom: 2px;
+  right: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.emoji-bubble {
+  font-size: 0.8rem;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.426);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -14px;
+  pointer-events: auto;
+  cursor: pointer;
+  opacity: 1;           
+  transform: translateY(0); 
+  transition: margin-top 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.emoji-bubble.vibrar {
+  box-shadow: 0 0 8px rgba(33, 150, 243, 0.8);
+  background-color: #ffffffd9;
+}
+
+.emoji-bubble.vibrar-rapido {
+  animation: vibrar-diagonal 0.18s infinite ease-in-out;
+}
+
+.emoji-bubble.vibrar-medio {
+  animation: vibrar-diagonal 0.35s infinite ease-in-out;
+}
+
+.emoji-bubble.vibrar-lento {
+  animation: vibrar-diagonal 0.6s infinite ease-in-out;
+}
+
+@keyframes vibrar-diagonal {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(3px, -3px); }
+  100% { transform: translate(0, 0); }
+}
+
+.emoji-stack.expanded .emoji-bubble {
+  margin-top: 5px;
+  transform: scale(1.1);
+  transition: margin-top 0.3s ease, transform 0.3s ease;
+}
+
+.emoji-stack.expanded .emoji-bubble:hover {
+  transform: scale(1.2);
+}
+
+.emoji-bubble.mas {
+  background-color: #f2f4f6;
+  box-shadow: 0 0 8px rgba(33, 150, 243, 0.8);
+  color: white;
+  font-weight: bold;
+  font-size: 0.8rem;
+  z-index: 1; /* debe estar arriba para poder verse */
+
+  &.vibrar {
+    box-shadow: 0 0 8px rgba(33, 150, 243, 0.8);
+    background-color: #ffffffd9;
+  }
+}
+
+.slider-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  gap: 10px;
+  background-color: #e3f2fd;
+  padding: 8px 12px;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.slider-container button {
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  padding: 4px;
+  background-color: #64b5f6;
+  color: white;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fecha-central {
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+  flex-grow: 1;
+  user-select: none;
+  color: #0d47a1;
+}

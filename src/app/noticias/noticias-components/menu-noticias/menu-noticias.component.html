@@ -1,0 +1,22 @@
+<div class="menu-overlay"
+     [class.cerrando]="cerrando"
+     (click)="cerrarMenu()"
+     (transitionend)="animacionTerminada()">
+</div>
+
+<div class="menu-panel"
+     [class.cerrando]="cerrando"
+     (animationend)="animacionTerminada()">
+  <div class="menu-header">
+    <span>Categorías</span>
+    <button class="btn-cerrar" (click)="cerrarMenu()">✖</button>
+  </div>
+
+  <ul class="menu-list">
+    <li *ngFor="let cat of categorias"
+        [class.selected]="cat === categoriaSeleccionada"
+        (click)="seleccionarCategoria(cat)">
+      {{ cat | titlecase }}
+    </li>
+  </ul>
+</div>

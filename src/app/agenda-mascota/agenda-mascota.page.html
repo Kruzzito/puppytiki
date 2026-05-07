@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Agenda de {{ nombreMascota }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="agenda-content">
+
+  <div class="agenda-wrapper">
+    <app-calendario
+      (fechaSeleccionada)="onFechaSeleccionada($event)"
+      [eventos]="eventos"
+      [modo]="'mascota'">
+    </app-calendario>
+
+    <div class="scrollable-eventos">
+      <ng-container *ngIf="eventosFiltrados.length > 0; else noEventos">
+        <ion-list>
+          <app-evento-agenda
+            *ngFor="let evento of eventosFiltrados"
+            [evento]="evento"
+            (editar)="abrirFormularioAgenda($event)"
+            (eliminar)="confirmarEliminarEvento($event)">
+          </app-evento-agenda>
+        </ion-list>
+      </ng-container>
+
+      <ng-template #noEventos>
+        <ion-text color="medium">
+          <p>No hay eventos programados para esta mascota en la fecha seleccionada.</p>
+        </ion-text>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="fade-bottom"></div>
+</ion-content>
+
+<ion-button
+  class="boton-flotante"
+  (click)="abrirFormularioAgenda()">
+  <ion-icon name="add" slot="icon-only"></ion-icon>
+</ion-button>

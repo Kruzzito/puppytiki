@@ -1,0 +1,23 @@
+:root {
+  /** Tabs personalizados */
+  --tab-mascotas-1: #621b81;   /* morado */
+  --tab-mascotas-2: #f8e7ff;   /* morado claro */
+  --tab-tienda-1: #e8c023;   /* amarillo */
+  --tab-tienda-2: #fffbe7;   /* amarillo claro */
+  --tab-noticias-1: #861c10;   /*vino */
+  --tab-noticias-2: rgb(255, 237, 237); /* vino claro */
+}
+
+/* Fondo de las páginas según tab activo */
+ion-router-outlet[name="mascotas"] ion-content {
+  --background: var(--tab-mascotas-2);
+}
+
+ion-router-outlet[name="tienda"] ion-content {
+  --background: var(--tab-tienda-2);
+}
+
+ion-router-outlet[name="noticias"] ion-content {
+  --background: var(--tab-noticias-2);
+}
+

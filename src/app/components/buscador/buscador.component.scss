@@ -1,0 +1,43 @@
+.buscador {
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.buscador input {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  outline: none;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+.page-tienda .buscador {
+  background: #fff8dc;
+}
+
+.page-tienda .buscador input {
+  border: 1px solid #f1c40f;
+  background: #fffde7;
+}
+
+.page-tienda .buscador input:focus {
+  border-color: #f39c12;
+  box-shadow: 0 0 6px rgba(243, 156, 18, 0.5);
+}
+
+
+.page-noticias .buscador {
+  background: #fdecea;
+}
+
+.page-noticias .buscador input {
+  border: 1px solid #e74c3c;
+  background: #fdecea;
+}
+
+.page-noticias .buscador input:focus {
+  border-color: #c0392b;
+  box-shadow: 0 0 6px rgba(192, 57, 43, 0.5);
+}

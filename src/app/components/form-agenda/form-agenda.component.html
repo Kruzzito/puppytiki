@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Agregar Evento
+        <span *ngIf="iconoEmoji" style="margin-left: 8px; font-size: 1.4em;">{{ iconoEmoji }}</span>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()" aria-label="Cerrar">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <div *ngIf="iconoEmoji" class="emoji-header">
+    {{ iconoEmoji }}
+  </div>
+<strong>🐾 Mascota:</strong> {{ nombreMascota }}<br>
+
+  <form #form="ngForm" (ngSubmit)="guardar(form)">
+    
+    <ion-item [class.invalid]="form.submitted && !evento">
+      <ion-label position="floating">Evento</ion-label>
+      <ion-input (ionFocus)="scrollToInput($event)" required [(ngModel)]="evento" name="evento"></ion-input>
+    </ion-item>
+
+    <ion-item [class.invalid]="(form.submitted && !fecha) || fechaInvalida">
+      <ion-label position="floating">Fecha</ion-label>
+      <ion-input (ionFocus)="scrollToInput($event)" type="date" required [(ngModel)]="fecha" name="fecha" [min]="minFecha" [max]="maxFecha"></ion-input>
+    </ion-item>
+
+    <div *ngIf="fechaInvalida" class="error-text">
+      Fecha inválida
+    </div>
+
+    <ion-item [class.invalid]="form.submitted && !hora">
+      <ion-label position="floating">Hora</ion-label>
+      <ion-input (ionFocus)="scrollToInput($event)" type="time" required [(ngModel)]="hora" name="hora"></ion-input>
+    </ion-item>
+
+    <ion-item [class.invalid]="form.submitted && !lugar">
+      <ion-label position="floating">Lugar</ion-label>
+      <ion-input (ionFocus)="scrollToInput($event)" type="text" required [(ngModel)]="lugar" name="lugar"></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label position="floating">Descripcion</ion-label>
+      <ion-textarea (ionFocus)="scrollToInput($event)" rows="3" [(ngModel)]="descripcion" name="descripcion"></ion-textarea>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="form.invalid" class="ion-margin-top">
+      Guardar
+    </ion-button>
+  </form>
+
+  <ion-toast [isOpen]="mostrarToast" message="✅ Evento guardado" duration="1000" color="success"
+    (didDismiss)="mostrarToast = false"></ion-toast>
+
+    <div *ngIf="keyboardVisible" style="height: 300px;"></div>
+
+</ion-content>

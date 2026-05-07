@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="abrirMenu()">
+        <ion-icon name="menu"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Noticias</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <div class="page-noticias">
+      <app-buscador
+        placeholder="Buscar noticias..."
+        (searchChange)="onSearchChange($event)">
+      </app-buscador>
+
+      <div class="linea-informativa">
+        Mostrando noticias de: {{ categoriaActual | titlecase }}
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="menu-abierto">
+  <div class="contenido-noticias">
+    <div class="grid-noticias">
+      <app-noticia
+        *ngFor="let noticia of (noticias$ | async) ?? []"
+        [noticia]="noticia">
+      </app-noticia>
+    </div>
+    <div class="spacer"></div>
+  </div>
+</ion-content>
+
+<app-menu-noticias
+  *ngIf="menuAbierto"
+  [categorias]="(categorias$ | async) ?? []"
+  [categoriaSeleccionada]="categoriaActual"
+  (cerrar)="cerrarMenu()"
+  (categoriaChange)="categoriaCambiada($event)">
+</app-menu-noticias>

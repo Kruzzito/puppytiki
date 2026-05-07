@@ -1,0 +1,71 @@
+:host {
+  ion-content {
+    --overflow: hidden;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 auto;
+    max-width: 900px;
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center; 
+  }
+
+  .contenido-flex {
+    display: flex;
+    flex-direction: column; 
+    height: 100%;
+    gap: 16px;
+    padding: 1px;
+    width: 100%;
+  }
+
+  app-calendario {
+    flex: 0 0 auto;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 1px;
+  }
+
+  .scrollable-eventos {
+    flex: 1 1 auto;
+    max-height: calc(100vh - 500px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 1px;
+    box-sizing: border-box;
+  }
+
+  @media (min-width: 600px) {
+    .contenido-flex {
+      flex-direction: row;
+      justify-content: center; 
+      align-items: center; 
+      height: 100%;
+      gap: 24px;
+      padding: 20px;
+    }
+
+    app-calendario {
+      flex: 0 0 45%;
+      max-width: 400px;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .scrollable-eventos {
+      flex: 1 1 auto;
+      max-height: none;
+      height: 100%;
+      overflow-y: auto;
+    }
+  }
+
+  app-evento-agenda {
+    margin-bottom: 12px;
+  }
+}

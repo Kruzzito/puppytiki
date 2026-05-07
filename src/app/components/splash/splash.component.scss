@@ -1,0 +1,40 @@
+.splash-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #d3e2d9;
+  position: relative;
+}
+
+.logo {
+  width: 200px;
+  height: auto;
+  opacity: 0;
+  transform: scale(0.5);
+  animation-fill-mode: forwards;
+}
+
+
+.logo-anim {
+  animation: fadeZoom 3s ease-in-out;
+}
+
+@keyframes fadeZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}

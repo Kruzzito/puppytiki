@@ -1,0 +1,151 @@
+<ion-header>
+  <ion-toolbar #toolbar>
+    <ion-buttons slot="start">
+      <ion-button class="boton-regresar" (click)="regresar()" aria-label="Regresar">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>
+      {{ mascota?.nombre }}
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ng-container *ngIf="menuMascota?.botonMenu">
+        <ng-container *ngTemplateOutlet="menuMascota.botonMenu"></ng-container>
+      </ng-container>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<app-menu-mascota #menuMascota [mascota]="mascota" [confirmarDescarga]="confirmarDescarga.bind(this)"
+  (citaGuardada)="recargarAgenda()">
+</app-menu-mascota>
+
+<ion-content [fullscreen]="true" class="ion-padding fondo-degradado"
+  [class.menu-abierto]="menuMascota?.mostrarMenu && menuMascota.mostrarMenu()"
+  (swipedown)="menuMascota.onSwipeDown()" (swipeup)="menuMascota.onSwipeUp()"
+  (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)">
+
+   <div class="foto-container" *ngIf="mascota?.foto">
+    <img [src]="mascota.foto" alt="Foto de la mascota" />
+    <p>{{ mascota.nombre }}</p>
+  </div>
+
+
+  <ion-segment [(ngModel)]="segment" color="primary" class="tabs-debajo-foto">
+    <ion-segment-button value="info">🐻</ion-segment-button>
+    <ion-segment-button value="ubicacion">🌎</ion-segment-button>
+    <ion-segment-button value="adopcion">👪</ion-segment-button>
+    <ion-segment-button value="responsable">👥</ion-segment-button>
+    <ion-segment-button value="emergencia">🚨</ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="segment === 'info'" class="detalle-card animate-fade-in">
+    <section class="seccion info-principal" aria-labelledby="datos-mascota-title">
+      <h2 id="datos-mascota-title">🐶 Datos de la mascota</h2>
+      <ul class="info-texto">
+        <li class="dato">
+          <strong class="dato-label">Nombre:</strong>
+          <span class="dato-valor">
+            {{ mascota?.nombre }} {{ mascota?.primerApellido }} {{ mascota?.segundoApellido || '' }}
+          </span>
+        </li>
+        <li class="dato">
+          <strong class="dato-label">F. nacimiento:</strong>
+          <span class="dato-valor">{{ mascota?.fechaNacimiento | date: 'dd/MM/yyyy' }}</span>
+        </li>
+        <li class="dato">
+          <strong class="dato-label">Edad:</strong>
+          <span class="dato-valor">{{ calcularEdad(mascota?.fechaNacimiento) }} años</span>
+        </li>
+        <li class="dato">
+          <strong class="dato-label">Especie:</strong>
+          <span class="dato-valor">{{ mascota?.especie }}</span>
+        </li>
+        <li class="dato">
+          <strong class="dato-label">Raza:</strong>
+          <span class="dato-valor">{{ mascota?.raza }}</span>
+        </li>
+        <li class="dato">
+          <strong class="dato-label">Sexo:</strong>
+          <span class="dato-valor">{{ mascota?.sexo }}</span>
+        </li>
+        <li *ngIf="mascota?.claveRegistro" class="dato">
+          <strong class="dato-label">CRDM:</strong>
+          <span class="dato-valor">{{ mascota.claveRegistro }}</span>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <div *ngIf="segment === 'ubicacion'" class="detalle-card animate-fade-in">
+    <section class="seccion" aria-labelledby="ubicacion-title" *ngIf="mascota?.pais || mascota?.estado || mascota?.municipio">
+      <h2 id="ubicacion-title">🌎 Ubicación</h2>
+      <ul>
+        <li class="dato">
+          <strong class="dato-label">País:</strong>
+          <span class="dato-valor">{{ mascota?.pais }}</span>
+        </li>
+        <li class="dato">
+          <strong class="dato-label">Estado:</strong>
+          <span class="dato-valor">{{ mascota?.estado }}</span>
+        </li>
+        <li class="dato">
+          <strong class="dato-label">Municipio:</strong>
+          <span class="dato-valor">{{ mascota?.municipio }}</span>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <div *ngIf="segment === 'adopcion'" class="detalle-card animate-fade-in">
+    <section class="seccion" *ngIf="mascota?.fechaAdopcion" aria-labelledby="adopcion-title">
+      <h2 id="adopcion-title">👪 Adopción</h2>
+      <ul>
+        <li class="dato">
+          <strong class="dato-label">F. adopción:</strong>
+          <span class="dato-valor">{{ mascota?.fechaAdopcion | date: 'dd/MM/yyyy' }}</span>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <div *ngIf="segment === 'responsable'" class="detalle-card animate-fade-in">
+    <section class="seccion" *ngIf="mascota?.responsable?.nombre" aria-labelledby="responsable-title">
+      <h2 id="responsable-title">👥 Responsable</h2>
+      <ul>
+        <li class="dato">
+          <strong class="dato-label">Nombre:</strong>
+          <span class="dato-valor">
+            {{ mascota.responsable.nombre }}
+            {{ mascota.responsable.primerApellido || '' }}
+            {{ mascota.responsable.segundoApellido || '' }}
+          </span>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <div *ngIf="segment === 'emergencia'" class="detalle-card animate-fade-in">
+    <section class="seccion" aria-labelledby="emergencia-title"
+      *ngIf="mascota?.emergencia?.telefono || mascota?.emergencia?.email || mascota?.emergencia?.domicilio">
+      <h2 id="emergencia-title">🚨 Contacto de emergencia</h2>
+      <ul>
+        <li *ngIf="mascota?.emergencia?.telefono" class="dato">
+          <strong class="dato-label">📞 Teléfono:</strong>
+          <span class="dato-valor">{{ mascota.emergencia.telefono }}</span>
+        </li>
+        <li *ngIf="mascota?.emergencia?.email" class="dato">
+          <strong class="dato-label">✉️ Email:</strong>
+          <span class="dato-valor">{{ mascota.emergencia.email }}</span>
+        </li>
+        <li *ngIf="mascota?.emergencia?.domicilio" class="dato">
+          <strong class="dato-label">🏠 Domicilio:</strong>
+          <span class="dato-valor">{{ mascota.emergencia.domicilio }}</span>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+</ion-content>

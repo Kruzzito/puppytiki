@@ -1,0 +1,163 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Agregar Mascota</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancelar()" aria-label="Cerrar formulario">
+        <ion-icon slot="icon-only" name="close" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="mascotaForm" (ngSubmit)="guardarMascota()" novalidate aria-labelledby="form-title">
+    <input id="fileInput" type="file" accept="image/*" (change)="onFileSelected($event)" hidden />
+
+    <ion-button expand="block" (click)="seleccionarFoto()" type="button">
+      <ion-icon slot="start" name="camera"></ion-icon>
+      Tomar foto / Cargar imagen
+    </ion-button>
+
+    <div *ngIf="previewImage" class="image-preview ion-text-center ion-padding" role="img" aria-label="Vista previa de la foto de la mascota">
+      <img [src]="previewImage" alt="Foto mascota" style="max-width: 150px; border-radius: 15px" />
+      <ion-button color="danger" size="small" (click)="eliminarFoto()" aria-label="Eliminar foto de mascota">
+        <ion-icon name="close"></ion-icon> Eliminar foto
+      </ion-button>
+    </div>
+    
+
+    <div class="ion-text-center ion-padding" *ngIf="mascotaForm.get('iconoEmoji')?.value">
+  <ion-text style="font-size: 2rem;">{{ mascotaForm.get('iconoEmoji')?.value }}</ion-text>
+</div>
+
+
+    <ion-item>
+  <ion-label position="stacked">Icono de tu mascota</ion-label>
+  <ion-select formControlName="iconoEmoji" interface="popover">
+    <ion-select-option value="🐶">🐶 Perro</ion-select-option>
+    <ion-select-option value="🐱">🐱 Gato</ion-select-option>
+    <ion-select-option value="🐹">🐹 Hámster</ion-select-option>
+    <ion-select-option value="🐰">🐰 Conejo</ion-select-option>
+    <ion-select-option value="🐢">🐢 Tortuga</ion-select-option>
+    <ion-select-option value="🐷">🐷 Cerdito</ion-select-option>
+    <ion-select-option value="🐦">🐦 Ave</ion-select-option>
+    <ion-select-option value="🐍">🐍 Serpiente</ion-select-option>
+    <ion-select-option value="🐠">🐠 Pez</ion-select-option>
+    <ion-select-option value="🐻">🐻 Hurón</ion-select-option>
+  </ion-select>
+</ion-item>
+
+
+    <ion-item (click)="toggleSeccion('obligatoria')" [attr.aria-expanded]="seccionObligatoriaOpen" aria-controls="datos-obligatorios">
+      <ion-label><strong>Datos de la mascota (obligatorios)</strong></ion-label>
+      <ion-icon [name]="seccionObligatoriaOpen ? 'chevron-up' : 'chevron-down'" slot="end"></ion-icon>
+    </ion-item>
+
+    <div *ngIf="seccionObligatoriaOpen" class="seccion" id="datos-obligatorios" role="region" aria-live="polite">
+      <ng-container *ngFor="let campo of [
+          { key: 'nombre', label: 'Nombre' },
+          { key: 'primerApellido', label: 'Primer Apellido' },
+          { key: 'segundoApellido', label: 'Segundo Apellido', optional: true },
+          { key: 'sexo', label: 'Sexo' },
+          { key: 'especie', label: 'Especie' },
+          { key: 'raza', label: 'Raza' },
+          { key: 'pais', label: 'País' },
+          { key: 'estado', label: 'Estado' },
+          { key: 'municipio', label: 'Municipio' }
+        ]">
+
+        <ion-item *ngIf="campo.key === 'nombre'; else otrosCampos">
+          <ion-label position="stacked">{{ campo.label }} <span *ngIf="!campo.optional">*</span></ion-label>
+          <ion-input [formControlName]="campo.key" id="{{ campo.key }}" (ionFocus)="scrollToInput($event)"></ion-input>
+        </ion-item>
+
+        <ng-template #otrosCampos>
+          <ion-item>
+            <ion-label position="stacked">{{ campo.label }} <span *ngIf="!campo.optional">*</span></ion-label>
+            <ion-input [formControlName]="campo.key" id="{{ campo.key }}" (ionFocus)="scrollToInput($event)"></ion-input>
+          </ion-item>
+        </ng-template>
+
+        <ion-text color="danger"
+          *ngIf="mascotaForm.get(campo.key)?.touched && mascotaForm.get(campo.key)?.invalid && !campo.optional"
+          role="alert">
+          <p class="ion-padding-start">{{ campo.label }} es obligatorio</p>
+        </ion-text>
+      </ng-container>
+
+      <ion-item>
+        <ion-label position="stacked">Fecha de Nacimiento</ion-label>
+        <ion-input formControlName="fechaNacimiento" type="date" [max]="fechaMaxima" (ionFocus)="scrollToInput($event)"></ion-input>
+      </ion-item>
+
+      <ion-text color="danger"
+        *ngIf="mascotaForm.get('fechaNacimiento')?.touched && mascotaForm.get('fechaNacimiento')?.errors" role="alert">
+        <p class="ion-padding-start" *ngIf="mascotaForm.get('fechaNacimiento')?.errors?.['required']">La fecha de nacimiento es obligatoria</p>
+        <p class="ion-padding-start" *ngIf="mascotaForm.get('fechaNacimiento')?.errors?.['fechaFutura']">La fecha no puede ser mayor a la fecha actual</p>
+        <p class="ion-padding-start" *ngIf="mascotaForm.get('fechaNacimiento')?.errors?.['fechaMuyAntigua']">La fecha no puede tener un rango mayor a 20 años</p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked">Fecha de Adopcion</ion-label>
+        <ion-input formControlName="fechaAdopcion" type="date" [max]="fechaMaxima" (ionFocus)="scrollToInput($event)"></ion-input>
+      </ion-item>
+
+      <ion-text color="danger"
+        *ngIf="mascotaForm.get('fechaAdopcion')?.touched && mascotaForm.get('fechaAdopcion')?.errors" role="alert">
+        <p class="ion-padding-start" *ngIf="mascotaForm.get('fechaAdopcion')?.errors?.['required']">La fecha de adopción es obligatoria</p>
+        <p class="ion-padding-start" *ngIf="mascotaForm.get('fechaAdopcion')?.errors?.['fechaFutura']">La fecha no puede ser mayor a la fecha actual</p>
+        <p class="ion-padding-start" *ngIf="mascotaForm.get('fechaAdopcion')?.errors?.['fechaMuyAntigua']">La fecha no puede tener un rango mayor a 20 años</p>
+      </ion-text>
+    </div>
+
+    <ion-item button (click)="toggleSeccion('responsable')" [attr.aria-expanded]="seccionResponsableOpen" aria-controls="datos-responsable">
+      <ion-label><strong>Responsable (opcional)</strong></ion-label>
+      <ion-icon [name]="seccionResponsableOpen ? 'chevron-up' : 'chevron-down'" slot="end"></ion-icon>
+    </ion-item>
+
+    <div *ngIf="seccionResponsableOpen" [formGroup]="responsable" class="seccion" id="datos-responsable" role="region" aria-live="polite">
+      <ion-item>
+        <ion-label position="stacked">Nombre</ion-label>
+        <ion-input formControlName="nombre" id="responsable-nombre" (ionFocus)="scrollToInput($event)"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Primer Apellido</ion-label>
+        <ion-input formControlName="primerApellido" id="responsable-primerApellido" (ionFocus)="scrollToInput($event)"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Segundo Apellido</ion-label>
+        <ion-input formControlName="segundoApellido" id="responsable-segundoApellido" (ionFocus)="scrollToInput($event)"></ion-input>
+      </ion-item>
+    </div>
+
+    <ion-item button (click)="toggleSeccion('emergencia')" [attr.aria-expanded]="seccionEmergenciaOpen" aria-controls="datos-emergencia">
+      <ion-label><strong>Emergencia (opcional)</strong></ion-label>
+      <ion-icon [name]="seccionEmergenciaOpen ? 'chevron-up' : 'chevron-down'" slot="end"></ion-icon>
+    </ion-item>
+
+    <div *ngIf="seccionEmergenciaOpen" [formGroup]="emergencia" class="seccion" id="datos-emergencia" role="region" aria-live="polite">
+      <ion-item>
+        <ion-label position="stacked">Domicilio</ion-label>
+        <ion-input formControlName="domicilio" id="domicilio" (ionFocus)="scrollToInput($event)"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Teléfono</ion-label>
+        <ion-input formControlName="telefono" id="telefono" (ionFocus)="scrollToInput($event)"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input formControlName="email" type="email" id="email" (ionFocus)="scrollToInput($event)"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="emergencia.get('email')?.touched && emergencia.get('email')?.invalid" role="alert">
+        <p class="ion-padding-start">Email inválido</p>
+      </ion-text>
+    </div>
+
+    <ion-button expand="block" type="submit" class="guardar-btn" color="primary">
+      <ion-icon slot="start" name="save" size="large"></ion-icon>
+      Guardar
+    </ion-button>
+
+    <div *ngIf="keyboardHeight > 0" [ngStyle]="{ height: keyboardHeight + 'px' }" class="keyboard-spacer"></div>
+  </form>
+</ion-content>
